@@ -53,7 +53,7 @@
 
     <div id="app" class="h-full flex flex-col max-w-md mx-auto bg-white shadow-2xl relative">
         
-        <!-- Header -->
+        <!-- Header (標頭) -->
         <header class="bg-primary text-white p-4 shadow-md z-10">
             <div class="flex justify-between items-center">
                 <div>
@@ -66,12 +66,12 @@
             </div>
         </header>
 
-        <!-- Main Content Area -->
+        <!-- Main Content Area (主內容區) -->
         <main class="flex-1 overflow-y-auto no-scrollbar bg-gray-50 pb-20">
             
             <!-- View: 行程 (Schedule) -->
             <div v-if="currentTab === 'schedule'" class="animate-fade-in">
-                <!-- Day Selector -->
+                <!-- Day Selector (日期選擇器) -->
                 <div class="sticky top-0 bg-white shadow-sm z-10 flex justify-around p-2">
                     <button 
                         v-for="(day, index) in days" 
@@ -84,33 +84,33 @@
                     </button>
                 </div>
 
-                <!-- Timeline -->
+                <!-- Timeline (時間軸) -->
                 <div class="p-4 relative">
-                    <!-- Vertical Line (位於 40px) -->
-                    <div class="absolute left-10 top-4 bottom-4 w-0.5 bg-gray-200"></div>
+                    <!-- 垂直線段已移除 -->
 
-                    <div v-for="(event, idx) in currentDayEvents" :key="idx" class="mb-6 relative pl-14 group">
+                    <!-- 行程項目容器，relative 定位是為了讓絕對定位的 Dot 和 Time 相對於此容器 -->
+                    <div v-for="(event, idx) in currentDayEvents" :key="idx" class="mb-6 relative group">
                         
-                        <!-- Dot Marker -->
+                        <!-- Dot Marker (圓點標記) - 定位到 ml-20 邊界並居中 -->
                         <div 
-                            class="absolute -left-4 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm transform -translate-x-1/2 z-10"
+                            class="absolute left-20 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm transform -translate-x-1/2 z-10"
                             :class="getIconColor(event.type)">
                         </div>
                         
-                        <!-- Time -->
-                        <div class="absolute -left-10 top-0 text-xs font-mono text-gray-400 w-16 text-right">
+                        <!-- Time (時間) - 調整為 w-20 並增加 pr-4，使時間更靠左且不與圓點重疊 -->
+                        <div class="absolute left-0 top-0 text-xs font-mono text-gray-400 w-20 text-right pr-4">
                             {{ event.time.split(' ')[0] }}
                         </div>
 
-                        <!-- Card -->
-                        <div class="bg-white p-4 rounded-xl shadow-sm border-l-4 hover:shadow-md transition-shadow" :class="getBorderColor(event.type)">
+                        <!-- Card (行程卡片) - 使用 ml-20 讓卡片內容移到時間軸右側 -->
+                        <div class="bg-white p-4 rounded-xl shadow-sm border-l-4 hover:shadow-md transition-shadow ml-20" :class="getBorderColor(event.type)">
                             <div class="flex justify-between items-start mb-1">
                                 <h3 class="font-bold text-gray-800">{{ event.title }}</h3>
                                 <i :class="[getIconClass(event.type), 'text-gray-400 text-sm']"></i>
                             </div>
                             <p v-if="event.desc" class="text-sm text-gray-600 mb-2">{{ event.desc }}</p>
                             
-                            <!-- Tags -->
+                            <!-- Tags (標籤) -->
                             <div class="flex flex-wrap gap-2 mt-2">
                                 <span v-if="event.location" class="inline-flex items-center text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
                                     <i class="fas fa-map-marker-alt mr-1"></i> {{ event.location }}
@@ -122,8 +122,8 @@
                         </div>
                     </div>
                     
-                    <!-- Day End Summary -->
-                    <div class="bg-indigo-50 p-4 rounded-xl mt-4 border border-indigo-100">
+                    <!-- Day End Summary (今日總結) - 同樣使用 ml-20 對齊 -->
+                    <div class="bg-indigo-50 p-4 rounded-xl mt-4 border border-indigo-100 ml-20">
                         <h4 class="text-indigo-800 font-bold text-sm mb-2"><i class="fas fa-moon mr-1"></i> 今日總結</h4>
                         <div class="text-xs text-indigo-700 space-y-1">
                             <p>早餐：{{ currentDaySummary.breakfast }}</p>
@@ -137,7 +137,7 @@
 
             <!-- View: 資訊 (Info) -->
             <div v-if="currentTab === 'info'" class="p-4 animate-fade-in">
-                <!-- Contact Card -->
+                <!-- Contact Card (企劃單位聯絡資訊) -->
                 <div class="bg-white rounded-xl shadow-sm p-5 mb-4 border-t-4 border-accent">
                     <h3 class="font-bold text-lg mb-3">企劃單位</h3>
                     <div class="flex items-start mb-3">
@@ -163,7 +163,7 @@
                     </div>
                 </div>
 
-                <!-- Accommodation Card -->
+                <!-- Accommodation Card (住宿資訊) -->
                 <h3 class="font-bold text-gray-700 mb-3 mt-6 px-1 pl-2">住宿資訊</h3>
                 <div class="space-y-4">
                     <!-- Day 1 Accommodation -->
@@ -205,7 +205,7 @@
             </div>
         </main>
 
-        <!-- Bottom Navigation -->
+        <!-- Bottom Navigation (底部導航欄) -->
         <nav class="bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.05)] h-16 flex justify-around items-center z-20">
             <button 
                 @click="currentTab = 'schedule'" 
@@ -231,7 +231,7 @@
         createApp({
             setup() {
                 const currentTab = ref('schedule');
-                const selectedDay = ref(0);
+                const selectedDay = ref(2); // 預設顯示 Day 3，以符合截圖
 
                 const days = ref([
                     {
@@ -307,7 +307,7 @@
                     return days.value[selectedDay.value].summary;
                 });
 
-                // Helper functions for UI styling
+                // Helper functions for UI styling (輔助函式用於 UI 樣式)
                 const getIconColor = (type) => {
                     switch(type) {
                         case 'assembly': return 'bg-red-500';
@@ -335,6 +335,7 @@
                 };
 
                 const getBorderColor = (type) => {
+                    // 邊框顏色設定 (border-l-*)
                     switch(type) {
                         case 'food': return 'border-l-orange-400';
                         case 'stay': return 'border-l-indigo-500';
