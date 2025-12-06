@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江南水鄉風情五日遊 | 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink-black: #1a1a1a;
+            --ink-grey: #4a5568;
+            --paper-white: #f7f7f5;
+            --indigo-accent: #4c6e91;
+            --gold-accent: #bfa67a;
+        }
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--paper-white);
+            color: var(--ink-black);
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .serif {
+            font-family: 'Noto Serif TC', serif;
+        }
+        .ink-bg {
+            background-image: url('https://images.unsplash.com/photo-1516083648057-0409a63212a2?q=80&w=2000&auto=format&fit=crop'); /* Placeholder for ink texture */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .card-glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
+        }
+        .card-glass:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(76, 110, 145, 0.3);
+            border-color: var(--gold-accent);
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--indigo-accent), transparent);
+            transform: translateX(-50%);
+        }
+        .marker {
+            width: 16px;
+            height: 16px;
+            background: var(--paper-white);
+            border: 3px solid var(--indigo-accent);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="relative h-screen flex items-center justify-center overflow-hidden ink-bg text-white">
+        <div class="absolute inset-0 bg-black/40 z-0"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto" id="hero-content">
+            <p class="text-lg md:text-xl tracking-[0.3em] mb-4 text-gray-200 uppercase">Premium Travel Itinerary</p>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-wide leading-tight">江南水鄉<br/><span class="text-3xl md:text-5xl font-normal italic">風情五日遊</span></h1>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 mt-12 text-sm md:text-base">
+                <div class="flex items-center gap-2 border border-white/30 px-4 py-2 rounded-full backdrop-blur-sm">
+                    <svg class="w-5 h-5 text-[#bfa67a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <span>2026.03.05 - 03.09</span>
+                </div>
+                <div class="flex items-center gap-2 border border-white/30 px-4 py-2 rounded-full backdrop-blur-sm">
+                    <svg class="w-5 h-5 text-[#bfa67a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    <span>中華航空 CI0583 / CI0584</span>
+                </div>
+            </div>
+
+            <div class="mt-16 animate-bounce">
+                <span class="text-white/60 text-xs tracking-widest">SCROLL TO EXPLORE</span>
+                <svg class="w-6 h-6 mx-auto mt-2 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-20 px-6 max-w-5xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-[#4c6e91] mb-8 serif">行程亮點</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="feature-card p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="text-4xl mb-4">🛶</div>
+                <h3 class="text-xl font-bold mb-2">烏鎮西柵</h3>
+                <p class="text-gray-600 text-sm">小橋流水人家，體驗提燈走橋的浪漫夜景。</p>
+            </div>
+            <div class="feature-card p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="text-4xl mb-4">🌊</div>
+                <h3 class="text-xl font-bold mb-2">海寧觀潮</h3>
+                <p class="text-gray-600 text-sm">欣賞錢塘江大潮，感受「一線潮」的氣勢磅礡。</p>
+            </div>
+            <div class="feature-card p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="text-4xl mb-4">🏙️</div>
+                <h3 class="text-xl font-bold mb-2">上海風華</h3>
+                <p class="text-gray-600 text-sm">外灘萬國建築與南京路繁華，新舊交錯的魔都魅力。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 pb-32 relative bg-gray-50">
+        <div class="timeline-line hidden md:block"></div>
+        
+        <div class="container mx-auto px-4 max-w-6xl">
+
+            <div class="day-row flex flex-col md:flex-row items-center mb-24 relative opacity-0 translate-y-10" id="day1">
+                <div class="hidden md:block marker"></div>
+                <div class="md:w-1/2 p-6 md:pr-12 md:text-right w-full">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-2 serif">DAY 01</h2>
+                    <p class="text-[#4c6e91] font-medium mb-4">高雄 ✈ 上海 ➝ 海寧</p>
+                    <div class="card-glass p-6 rounded-xl shadow-sm text-left inline-block w-full">
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start gap-2"><span class="text-[#bfa67a]">●</span> 16:35 高雄機場起飛 (CI0583)</li>
+                            <li class="flex items-start gap-2"><span class="text-[#bfa67a]">●</span> 19:00 抵達上海浦東機場</li>
+                            <li class="flex items-start gap-2"><span class="text-[#bfa67a]">●</span> 專車前往海寧【工人路美食街】</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-gray-200 text-sm flex justify-between items-center">
+                            <span class="text-gray-500">🍽️ 晚餐：機上餐</span>
+                            <span class="font-semibold text-gray-700">🏨 海寧賓館 或同級</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-4 md:pl-12 w-full">
+                    <img src="https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=800&auto=format&fit=crop" alt="Shanghai Airport" class="rounded-xl shadow-lg w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+            </div>
+
+            <div class="day-row flex flex-col md:flex-row-reverse items-center mb-24 relative opacity-0 translate-y-10" id="day2">
+                <div class="hidden md:block marker"></div>
+                <div class="md:w-1/2 p-6 md:pl-12 w-full">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-2 serif">DAY 02</h2>
+                    <p class="text-[#4c6e91] font-medium mb-4">海寧 ➝ 紹興</p>
+                    <div class="card-glass p-6 rounded-xl shadow-sm w-full">
+                        <h4 class="font-bold mb-3 text-lg">古韻與潮聲</h4>
+                        <ul class="space-y-2 text-gray-600 text-sm mb-4">
+                            <li>📍 南關廂古街：體驗百年商業文化</li>
+                            <li>📍 海寧皮革城：時尚購物重地</li>
+                            <li>📍 鹽官古鎮 & 觀潮公園：天下奇觀錢塘潮</li>
+                            <li>📍 紹興：黃酒博物館、倉橋老街</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-gray-200 text-sm grid grid-cols-2 gap-2">
+                            <span class="text-gray-500">🍽️ 早：飯店內 / 午：紹興風味 / 晚：皮城風味</span>
+                            <span class="font-semibold text-gray-700 col-span-2">🏨 戴斯精選溫德姆酒店 或同級</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-4 md:pr-12 w-full">
+                     <img src="https://images.unsplash.com/photo-1628522736140-5e363943343d?q=80&w=800&auto=format&fit=crop" alt="Traditional Architecture" class="rounded-xl shadow-lg w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+            </div>
+
+            <div class="day-row flex flex-col md:flex-row items-center mb-24 relative opacity-0 translate-y-10" id="day3">
+                <div class="hidden md:block marker"></div>
+                <div class="md:w-1/2 p-6 md:pr-12 md:text-right w-full">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-2 serif">DAY 03</h2>
+                    <p class="text-[#4c6e91] font-medium mb-4">紹興 ➝ 烏鎮</p>
+                    <div class="card-glass p-6 rounded-xl shadow-sm text-left inline-block w-full">
+                         <h4 class="font-bold mb-3 text-lg">水鄉夢華錄</h4>
+                        <ul class="space-y-2 text-gray-600 text-sm mb-4">
+                            <li>📍 柯岩風景區：雲骨山、湖中石塔</li>
+                            <li>📍 魯鎮（含遊船）：重現魯迅筆下風情</li>
+                            <li>📍 蘭亭景區：曲水流觴、書法聖地</li>
+                            <li>📍 <span class="text-[#4c6e91] font-bold">烏鎮西柵景區</span>：提燈走橋、絕美夜景</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-gray-200 text-sm">
+                            <div class="text-gray-500 mb-1">🍽️ 早：飯店內 / 午：鹽官風味 / 晚：烏鎮風味</div>
+                            <div class="font-semibold text-gray-700">🏨 枕水飯店 / 通安客棧 或同級</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-4 md:pl-12 w-full">
+                     <img src="https://images.unsplash.com/photo-1543187282-536967732d84?q=80&w=800&auto=format&fit=crop" alt="Wuzhen Water Town" class="rounded-xl shadow-lg w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+            </div>
+
+            <div class="day-row flex flex-col md:flex-row-reverse items-center mb-24 relative opacity-0 translate-y-10" id="day4">
+                <div class="hidden md:block marker"></div>
+                <div class="md:w-1/2 p-6 md:pl-12 w-full">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-2 serif">DAY 04</h2>
+                    <p class="text-[#4c6e91] font-medium mb-4">烏鎮 ➝ 上海</p>
+                    <div class="card-glass p-6 rounded-xl shadow-sm w-full">
+                        <h4 class="font-bold mb-3 text-lg">繁華夜上海</h4>
+                        <ul class="space-y-2 text-gray-600 text-sm mb-4">
+                            <li>📍 烏鎮晨光：藍印布坊、醬園</li>
+                            <li>📍 南京路步行街：中華第一街</li>
+                            <li>📍 <span class="text-[#4c6e91] font-bold">外灘萬國建築群</span>：哥德式、巴洛克式建築</li>
+                            <li>📍 黃浦江夜遊船：飽覽浦江兩岸璀璨燈火</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-gray-200 text-sm grid grid-cols-2 gap-2">
+                             <span class="text-gray-500">🍽️ 早：飯店內 / 午：水鄉風味 / 晚：滬派料理</span>
+                            <span class="font-semibold text-gray-700 col-span-2">🏨 曙光薇飯店 / 三甲港鉑派飯店 或同級</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-4 md:pr-12 w-full">
+                     <img src="https://images.unsplash.com/photo-1538428494232-9c0d8d3ab60d?q=80&w=800&auto=format&fit=crop" alt="The Bund Shanghai" class="rounded-xl shadow-lg w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+            </div>
+
+            <div class="day-row flex flex-col md:flex-row items-center mb-12 relative opacity-0 translate-y-10" id="day5">
+                <div class="hidden md:block marker"></div>
+                <div class="md:w-1/2 p-6 md:pr-12 md:text-right w-full">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-2 serif">DAY 05</h2>
+                    <p class="text-[#4c6e91] font-medium mb-4">上海 ✈ 高雄</p>
+                    <div class="card-glass p-6 rounded-xl shadow-sm text-left inline-block w-full">
+                         <h4 class="font-bold mb-3 text-lg">再見魔都</h4>
+                        <ul class="space-y-2 text-gray-600 text-sm mb-4">
+                            <li>📍 城隍廟商圈 & 九曲橋：老上海風情</li>
+                            <li>📍 張園 & 星巴克工坊：時尚文青街區</li>
+                            <li>📍 1192老上海風情街：復古打卡熱點</li>
+                            <li class="mt-4 pt-2 border-t border-dashed border-gray-300">✈ 20:15 上海浦東起飛 (CI0584)</li>
+                            <li>✈ 22:35 抵達高雄溫暖的家</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-gray-200 text-sm">
+                            <span class="text-gray-500">🍽️ 早：飯店內 / 午：中式合菜</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-4 md:pl-12 w-full">
+                    <img src="https://images.unsplash.com/photo-1582260656094-142f36070a72?q=80&w=800&auto=format&fit=crop" alt="Shanghai Old Street" class="rounded-xl shadow-lg w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <footer class="bg-[#1a1a1a] text-white py-16 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl serif mb-8">預約您的江南之旅</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white/10 p-8 rounded-lg backdrop-blur-sm border border-white/10">
+                    <p class="text-gray-400 mb-2 text-sm">行程原價</p>
+                    <div class="text-2xl line-through decoration-red-500 decoration-2">NT$ 25,500</div>
+                </div>
+                <div class="bg-[#4c6e91]/20 p-8 rounded-lg backdrop-blur-sm border border-[#4c6e91]/50 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-[#4c6e91]/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                    <p class="text-[#bfa67a] mb-2 text-sm font-bold relative z-10">現金優惠價</p>
+                    <div class="text-4xl font-bold text-white relative z-10">NT$ 25,000</div>
+                </div>
+            </div>
+
+            <div class="text-gray-400 text-sm space-y-2 mb-12">
+                <p>包含：來回機票、稅金、當地交通、膳宿、門票、500萬責任險。</p>
+                <p>中國青年旅行社 雲嘉南分公司</p>
+            </div>
+
+            <button class="bg-[#bfa67a] text-black px-10 py-4 rounded-full font-bold hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg shadow-[#bfa67a]/30">
+                立即聯繫報名
+            </button>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animation
+        gsap.from("#hero-content > *", {
+            y: 50,
+            opacity: 0,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+
+        // Day Rows Animation
+        const dayRows = document.querySelectorAll('.day-row');
+        dayRows.forEach((row, index) => {
+            gsap.to(row, {
+                scrollTrigger: {
+                    trigger: row,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // Feature Cards Animation
+        gsap.from(".feature-card", {
+            scrollTrigger: {
+                trigger: ".feature-card",
+                start: "top 85%"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "back.out(1.7)"
+        });
+    </script>
+</body>
+</html>
